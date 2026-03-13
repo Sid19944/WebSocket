@@ -3,12 +3,6 @@ import express from "express";
 const app = express();
 const PORT = 3000;
 
-app.get("/keep-awaik", (req, res) => {
-  return res.status(200).json({
-    message: "Serv is on",
-  });
-});
-
 const httpServer = app.listen(PORT, () => {
   console.log(`App is listning on PORT ${PORT}`);
 });
@@ -18,6 +12,12 @@ const io = new Server(httpServer, {
     origin: ["https://websocket-ept8.onrender.com", "http://localhost:5173"],
     methods : ["GET"]
   },
+});
+
+app.get("/keep-awaik", (req, res) => {
+  return res.status(200).json({
+    message: "Serv is on",
+  });
 });
 
 io.on("connection", (socket) => {
