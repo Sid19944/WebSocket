@@ -1,12 +1,11 @@
 import { useState } from "react";
 import { io } from "socket.io-client";
-import { Routes, Route } from "react-router-dom";
 import JoinChatRoom from "./JoinChatRoom";
 import ChatRoom from "./ChatRoom";
 import { useEffect } from "react";
 
 // initializing the socket connection
-const socket = io("http://localhost:3000");
+const socket = io("https://websocket-ept8.onrender.com");
 
 function App() {
   const [isHeRoom, setIsHeRoom] = useState(false);
