@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { useState } from "react";
-import { Socket } from "socket.io-client";
 import { v4 as uuidv4 } from "uuid";
+import ShareIcon from "@mui/icons-material/Share";
 
 function ChatRoom({ username, roomId, socket }) {
   const messageEndRef = useRef(null);
@@ -130,12 +130,13 @@ function ChatRoom({ username, roomId, socket }) {
   return (
     <div className="h-[90vh] justify-center items-center flex flex-col gap-2">
       <div className="flex flex-col gap-1 justify-center items-center font-semibold">
-        <h1 className="text-3xl">
-          Room ID : {roomId}{" "}
-          <button className="border px-5" onClick={handleShare}>
+        <div className="flex gap-3 items-center">
+          <h1 className="text-3xl">Room ID : {roomId} </h1>
+          <button className="border flex active:bg-purple-500 h-fit items-center justify-center gap-2 px-2 text-sm rounded-lg" onClick={handleShare}>
+            <ShareIcon style={{fontSize : "15px"}}/>
             Share
           </button>
-        </h1>
+        </div>
         <h1 className="text-xl">
           Welcome{" "}
           <span className="text-purple-500 font-serif font-light">
