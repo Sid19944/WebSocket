@@ -9,7 +9,7 @@ const httpServer = app.listen(PORT, () => {
 
 const io = new Server(httpServer, {
   cors: {
-    origin: ["https://websocket-ept8.onrender.com", "http://localhost:5173"],
+    origin: ["https://chat-room-ebon-psi.vercel.app/", "http://localhost:5173"],
     methods: ["GET", "POST"],
   },
 });
