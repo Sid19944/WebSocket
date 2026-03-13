@@ -1,1 +1,16 @@
 @import "tailwindcss";
+
+.textMove {
+  font-weight: 600;
+  background-size: 300% 300%;
+  animation: moveSide 10s linear infinite;
+}
+
+@keyframes moveSide {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 300% 0%;
+  }
+}

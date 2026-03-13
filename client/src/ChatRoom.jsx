@@ -17,6 +17,8 @@ function ChatRoom({ username, roomId, socket }) {
   const handleSendMesssage = (e) => {
     e.preventDefault();
     // add the message obj to the messages array
+    
+    if (currentMsg.trim() == "") return;
     setMessages((prev) => [
       ...prev,
       {
@@ -97,8 +99,6 @@ function ChatRoom({ username, roomId, socket }) {
     };
   });
 
-  console.log(messages);
-
   return (
     <div className="h-screen justify-center items-center flex flex-col gap-2">
       <div className="flex flex-col gap-1 justify-center items-center font-semibold">
@@ -109,6 +109,7 @@ function ChatRoom({ username, roomId, socket }) {
             {username}
           </span>
         </h1>
+        <h1 style={{fontSize : "12px", color : "gray"}} className="border rounded-lg px-3">🔔 Don't refresh/leave the page to stay in the Room</h1>
       </div>
       <div className="h-[80vh] shadow-[0px_0px_3px_3px] shadow-black w-[80%] rounded-lg bg-gray-900 p-2 flex flex-col gap-1 overflow-auto">
         {messages.map((message) => {
@@ -130,13 +131,13 @@ function ChatRoom({ username, roomId, socket }) {
               >
                 <span
                   className={`text-xs text-blue-400 ${message.username == username ? "text-end" : "text-start"}`}
-                  style={{ fontSize: "7px" }}
+                  style={{ fontSize: "9px" }}
                 >
                   {message.username}
                 </span>
 
                 <span
-                  className={`text-sm flex justify-between w-full px-2 ${message.username == username ? "ml-auto bg-gray-600 rounded-br-2xl rounded-tl-2xl" : "bg-purple-600 rounded-tr-2xl rounded-bl-2xl"}`}
+                  className={`text-md flex justify-between w-full px-2 ${message.username == username ? "ml-auto bg-gray-600 rounded-br-2xl rounded-tl-2xl" : "bg-purple-600 rounded-tr-2xl rounded-bl-2xl"}`}
                 >
                   {text}
                 </span>
@@ -165,7 +166,7 @@ function ChatRoom({ username, roomId, socket }) {
           onKeyDown={() => setActivity(true)}
         />
         <button
-          className="border w-30 rounded-lg bg-purple-800"
+          className="border w-30 rounded-lg bg-purple-600 active:bg-purple-800 cursor-pointer"
           onClick={handleSendMesssage}
         >
           Send
