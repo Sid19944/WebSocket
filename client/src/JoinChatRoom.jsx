@@ -1,5 +1,11 @@
 import React from "react";
 import { useState } from "react";
+import SecurityIcon from "@mui/icons-material/Security";
+import EnhancedEncryptionIcon from "@mui/icons-material/EnhancedEncryption";
+import ContactEmergencyIcon from "@mui/icons-material/ContactEmergency";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import SdStorageIcon from "@mui/icons-material/SdStorage";
+import PersonalVideoIcon from "@mui/icons-material/PersonalVideo";
 
 function JoinChatRoom(props) {
   const handleSubmit = (e) => {
@@ -8,9 +14,9 @@ function JoinChatRoom(props) {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center min-h-screen">
+    <div className="flex flex-col justify-center items-center h-screen overflow-hidden">
       <h1
-        className="text-4xl font-serif bg-clip-text text-transparent textMove animate-spin drop-shadow-[0_0_20px_#0f23fa]"
+        className="text-4xl flex font-serif bg-clip-text text-transparent textMove animate-spin drop-shadow-[0_0_20px_#0f23fa]"
         style={{
           backgroundImage: `linear-gradient(90deg, #a200ff, #fae30f, #0f23fa)`,
           animation: "moveSide 10s linear infinite",
@@ -42,6 +48,41 @@ function JoinChatRoom(props) {
           Join Room Now
         </button>
       </form>
+
+      <div className="p-1 flex w-[90%] overflow-x-auto flex-nowrap scrollbar-hide gap-4 ">
+        <div className="border bg-gray-900 p-2 w-60 shrink-0 rounded-lg shadow-[0_0_10px_#b700ff] flex flex-col justify-around items-center">
+          <SecurityIcon style={{ fontSize: "40px" }} />A privacy-first,
+          decentralized chat platform whestyle= re rooms are created on the
+          fly—no accounts, no tracking, just secure conversation.
+        </div>
+        <div className="border bg-gray-900 p-2 w-60 shrink-0 rounded-lg shadow-[0_0_10px_#b700ff] flex flex-col justify-around items-center">
+          <ContactEmergencyIcon style={{ fontSize: "40px" }} />
+          Zero-Identity Entry: Users join via a unique Room ID and a temporary
+          display name. No email, no OAuth, and no personal data stored.
+        </div>
+        <div className="border bg-gray-900 p-2 w-60 shrink-0 rounded-lg shadow-[0_0_10px_#b700ff] flex flex-col justify-around items-center">
+          <EnhancedEncryptionIcon style={{ fontSize: "40px" }} />
+          End-to-End Encryption (E2EE): Leverages Web Crypto API to encrypt
+          messages locally before they ever hit the wire. Not even the server
+          can read your chats.
+        </div>
+        <div className="border bg-gray-900 p-2 w-60 shrink-0 rounded-lg shadow-[0_0_10px_#b700ff] flex flex-col justify-around items-center">
+          <AccessTimeIcon style={{ fontSize: "40px" }} />
+          Real-Time Sync: Powered by WebSockets (ws) for sub-millisecond
+          latency. Experience "as-it-happens" typing and message delivery.
+        </div>
+        <div className="border bg-gray-900 p-2 w-60 shrink-0 rounded-lg shadow-[0_0_10px_#b700ff] flex flex-col justify-around items-center">
+          <SdStorageIcon style={{ fontSize: "40px" }} />
+          Volatile Storage: Chats exist only within the room's lifecycle. Once
+          the session ends, the data vanishes, ensuring a zero-footprint digital
+          shadow.
+        </div>
+        <div className="border bg-gray-900 p-2 w-60 shrink-0 rounded-lg shadow-[0_0_10px_#b700ff] flex flex-col justify-around items-center">
+          <PersonalVideoIcon style={{ fontSize: "40px" }} />
+          Room Isolation: Complete logical separation between rooms; data never
+          leaks across IDs.
+        </div>
+      </div>
     </div>
   );
 }

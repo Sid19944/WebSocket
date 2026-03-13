@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useState } from "react";
 import { Socket } from "socket.io-client";
 import { v4 as uuidv4 } from "uuid";
 
 function ChatRoom({ username, roomId, socket }) {
+  const messageEndRef = useRef(null);
   const [currentMsg, setCurrentMsg] = useState("");
   const [messages, setMessages] = useState([]);
   const [activity, setActivity] = useState(false);
@@ -14,10 +15,18 @@ function ChatRoom({ username, roomId, socket }) {
     socket.emit("user_typing", { username, roomId });
   };
 
+  const scroolToBottom = () => {
+    messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scroolToBottom();
+  }, [messages]);
+
   const handleSendMesssage = (e) => {
     e.preventDefault();
     // add the message obj to the messages array
-    
+
     if (currentMsg.trim() == "") return;
     setMessages((prev) => [
       ...prev,
@@ -100,7 +109,7 @@ function ChatRoom({ username, roomId, socket }) {
   });
 
   return (
-    <div className="h-screen justify-center items-center flex flex-col gap-2">
+    <div className="h-[90vh] justify-center items-center flex flex-col gap-2">
       <div className="flex flex-col gap-1 justify-center items-center font-semibold">
         <h1 className="text-3xl">Room ID : {roomId}</h1>
         <h1 className="text-xl">
@@ -109,7 +118,12 @@ function ChatRoom({ username, roomId, socket }) {
             {username}
           </span>
         </h1>
-        <h1 style={{fontSize : "12px", color : "gray"}} className="border rounded-lg px-3">🔔 Don't refresh/leave the page to stay in the Room</h1>
+        <h1
+          style={{ fontSize: "12px", color: "gray" }}
+          className="border rounded-lg px-3"
+        >
+          🔔 Don't refresh/leave the page to stay in the Room
+        </h1>
       </div>
       <div className="h-[80vh] shadow-[0px_0px_3px_3px] shadow-black w-[80%] rounded-lg bg-gray-900 p-2 flex flex-col gap-1 overflow-auto">
         {messages.map((message) => {
@@ -152,7 +166,10 @@ function ChatRoom({ username, roomId, socket }) {
           }
         })}
 
-        <div className="mt-auto text-center text-xs text-gray-400">
+        <div
+          ref={messageEndRef}
+          className="mt-auto text-center text-xs text-gray-400"
+        >
           {activity}
         </div>
       </div>
