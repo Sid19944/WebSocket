@@ -2,6 +2,8 @@ import { Server } from "socket.io";
 import express from "express";
 const app = express();
 const PORT = 3000;
+import dotenv from "dotenv";
+dotenv.config();
 
 const httpServer = app.listen(PORT, () => {
   console.log(`App is listning on PORT ${PORT}`);
@@ -9,7 +11,7 @@ const httpServer = app.listen(PORT, () => {
 
 const io = new Server(httpServer, {
   cors: {
-    origin: ["https://chat-room-ebon-psi.vercel.app/", "http://localhost:5173"],
+    origin: [process.env.URL, "http://localhost:5173"],
     methods: ["GET", "POST"],
   },
 });
