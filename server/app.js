@@ -9,7 +9,8 @@ const httpServer = app.listen(PORT, () => {
 
 const io = new Server(httpServer, {
   cors: {
-    origin: "*",
+    origin: ["https://websocket-ept8.onrender.com", "http://localhost:5173"],
+    methods: ["GET", "POST"],
   },
 });
 
