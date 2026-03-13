@@ -108,10 +108,34 @@ function ChatRoom({ username, roomId, socket }) {
     };
   });
 
+  const handleShare = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: "Join my Private Chat!",
+          text: `Join this secure room using my Link ${window.location.href}`,
+        });
+        console.log("Shared successfully");
+      } catch (error) {
+        console.log("Error sharing:", error);
+      }
+    } else {
+      // 2. Fallback: If not supported (like on some Desktop browsers)
+      alert(
+        "Sharing is not supported on this browser. Copy the link manually!",
+      );
+    }
+  };
+
   return (
     <div className="h-[90vh] justify-center items-center flex flex-col gap-2">
       <div className="flex flex-col gap-1 justify-center items-center font-semibold">
-        <h1 className="text-3xl">Room ID : {roomId}</h1>
+        <h1 className="text-3xl">
+          Room ID : {roomId}{" "}
+          <button className="border px-5" onClick={handleShare}>
+            Share
+          </button>
+        </h1>
         <h1 className="text-xl">
           Welcome{" "}
           <span className="text-purple-500 font-serif font-light">

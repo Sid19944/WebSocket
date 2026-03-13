@@ -8,6 +8,15 @@ import SdStorageIcon from "@mui/icons-material/SdStorage";
 import PersonalVideoIcon from "@mui/icons-material/PersonalVideo";
 
 function JoinChatRoom(props) {
+  const data = new URLSearchParams(window.location.search);
+  const roomId = data.get("roomId");
+
+  if (roomId) {
+    setTimeout(() => {
+      props.setRoomId(roomId);
+    }, 100);
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
     props.onJoin();
@@ -24,7 +33,7 @@ function JoinChatRoom(props) {
       >
         JOIN CHAT ROOM
       </h1>
-      <form className="flex flex-col p-3 gap-3 min-w-60 w-[40%]">
+      <form className="flex flex-col p-3 gap-3 min-w-60 sm:w-[40%] w-[90%]">
         <input
           className="bg-gray-950 p-2 rounded-lg outline-none"
           type="text"
