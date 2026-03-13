@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import SecurityIcon from "@mui/icons-material/Security";
 import EnhancedEncryptionIcon from "@mui/icons-material/EnhancedEncryption";
@@ -11,11 +11,13 @@ function JoinChatRoom(props) {
   const data = new URLSearchParams(window.location.search);
   const roomId = data.get("roomId");
 
-  if (roomId) {
-    setTimeout(() => {
-      props.setRoomId(roomId);
-    }, 100);
-  }
+  useEffect(() => {
+    if (roomId) {
+      setTimeout(() => {
+        props.setRoomId(roomId);
+      }, 100);
+    }
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();

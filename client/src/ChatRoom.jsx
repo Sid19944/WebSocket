@@ -2,12 +2,20 @@ import React, { useEffect, useRef } from "react";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import ShareIcon from "@mui/icons-material/Share";
+import { useSearchParams } from "react-router-dom";
 
 function ChatRoom({ username, roomId, socket }) {
   const messageEndRef = useRef(null);
   const [currentMsg, setCurrentMsg] = useState("");
   const [messages, setMessages] = useState([]);
   const [activity, setActivity] = useState(false);
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  useEffect(() => {
+    setTimeout(() => {
+      setSearchParams({ roomId: roomId });
+    }, 500);
+  }, []);
 
   const handelInputChange = (e) => {
     setCurrentMsg(e.target.value);
@@ -132,8 +140,11 @@ function ChatRoom({ username, roomId, socket }) {
       <div className="flex flex-col gap-1 justify-center items-center font-semibold">
         <div className="flex gap-3 items-center">
           <h1 className="text-3xl">Room ID : {roomId} </h1>
-          <button className="border flex active:bg-purple-500 h-fit items-center justify-center gap-2 px-2 text-sm rounded-lg" onClick={handleShare}>
-            <ShareIcon style={{fontSize : "15px"}}/>
+          <button
+            className="border flex active:bg-purple-500 h-fit items-center justify-center gap-2 px-2 text-sm rounded-lg"
+            onClick={handleShare}
+          >
+            <ShareIcon style={{ fontSize: "15px" }} />
             Share
           </button>
         </div>
